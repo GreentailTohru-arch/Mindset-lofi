@@ -2149,3 +2149,5 @@ progress::-webkit-progress-value {
 }
 
 @media (max-width: 800px) { .reference-entry { grid-template-columns: 1fr; } }
+
+.reference-choice > span { font-size: clamp(20px, 1.7vw, 25px); padding-right: 20px; letter-spacing: .08em; }
