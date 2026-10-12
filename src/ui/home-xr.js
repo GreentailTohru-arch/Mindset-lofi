@@ -235,65 +235,70 @@ export function mountHomeVR({ read, actions }) {
     dc.lineTo(2100, 120);
     dc.stroke();
     if (d.kind === "home") {
+      const homeText = (ctx, text, x, y, size, color = "#c3c7ce", serif = false) => posterText(ctx, text, x, y, size, color, serif);
       const gradient = dc.createLinearGradient(0, 0, 2000, 1400);
-      gradient.addColorStop(0, "#79c2b9");
-      gradient.addColorStop(0.65, "#d8e7dd");
-      gradient.addColorStop(1, "#f0eee4");
+      gradient.addColorStop(0, "#08090b");
+      gradient.addColorStop(0.65, "#0b0c0f");
+      gradient.addColorStop(1, "#08090b");
       dc.fillStyle = gradient;
       dc.fillRect(0, 0, 2200, 1400);
-      posterText(dc, "MINDSET OF LO-FI", 140, 100, 28);
-      posterText(dc, "沉浸式空间体验 / VR EDITION", 1500, 100, 28);
-      dc.strokeStyle = "#315c4e44";
+      homeText(dc, "MINDSET OF LO-FI", 140, 100, 28);
+      homeText(dc, "沉浸式空间体验 / VR EDITION", 1500, 100, 28);
+      dc.strokeStyle = "#ffffff44";
       dc.beginPath();
       dc.moveTo(140, 145);
       dc.lineTo(2060, 145);
       dc.stroke();
-      brandWordmark(dc, brandImages, 140, 240, 940);
-      if (brandImages.symbol)
+      brandWordmark(dc, brandImages, 140, 240, 940, true);
+      if (brandImages.symbol) {
+        dc.save();
+        dc.filter = "invert(1)";
         dc.drawImage(brandImages.symbol, 125, 640, 275, 129);
-      posterText(dc, "THE MINDSET", 440, 670, 83, "#173632", true);
-      posterText(dc, "OF LOW FIDELITY", 440, 748, 57, "#173632", true);
-      posterText(dc, brand.slogan, 140, 968, 83, "#173632", true);
-      posterText(dc, "RECONNECT WITH", 590, 930, 32, "#173632", true);
-      posterText(dc, "YOUR TRUE SELF", 590, 980, 32, "#173632", true);
+        dc.restore();
+      }
+      homeText(dc, "THE MINDSET", 440, 670, 83, "#f4f4f2", true);
+      homeText(dc, "OF LOW FIDELITY", 440, 748, 57, "#f4f4f2", true);
+      homeText(dc, brand.slogan, 140, 968, 83, "#f4f4f2", true);
+      homeText(dc, "RECONNECT WITH", 590, 930, 32, "#f4f4f2", true);
+      homeText(dc, "YOUR TRUE SELF", 590, 980, 32, "#f4f4f2", true);
       dc.beginPath();
       dc.moveTo(1230, 240);
       dc.lineTo(1230, 1050);
       dc.stroke();
-      posterText(dc, "让此刻，有处安放。", 1340, 265, 52, "#173632", true);
-      posterText(dc, "A ROOM FOR EVERY STATE OF MIND", 1340, 320, 23);
+      homeText(dc, "让此刻，有处安放。", 1340, 265, 52, "#f4f4f2", true);
+      homeText(dc, "A ROOM FOR EVERY STATE OF MIND", 1340, 320, 23);
       [400, 740].forEach((y, i) => {
-        dc.fillStyle = "#fafff640";
+        dc.fillStyle = "#ffffff09";
         dc.beginPath();
         dc.roundRect(1340, y, 720, 285, 16);
         dc.fill();
-        dc.strokeStyle = "#315c4e66";
+        dc.strokeStyle = "#ffffff66";
         dc.stroke();
-        posterText(
+        homeText(
           dc,
           i ? "02 / RESONATE · 模拟体验" : "01 / EXPLORE",
           1385,
           y + 52,
           25,
         );
-        posterText(
+        homeText(
           dc,
           i ? "感应选择" : "自由选择",
           1385,
           y + 128,
           55,
-          "#173632",
+          "#f4f4f2",
           true,
         );
-        posterText(dc, "↗", 1960, y + 128, 46);
-        posterText(
+        homeText(dc, "↗", 1960, y + 128, 46);
+        homeText(
           dc,
           i ? "感受心境，遇见属于你的空间。" : "二十四种意境，随心而往。",
           1385,
           y + 195,
           29,
         );
-        posterText(
+        homeText(
           dc,
           i ? "FOLLOW YOUR FEELING" : "FIND YOUR SPACE",
           1385,
@@ -301,22 +306,22 @@ export function mountHomeVR({ read, actions }) {
           22,
         );
       });
-      dc.strokeStyle = "#315c4e55";
+      dc.strokeStyle = "#ffffff55";
       dc.beginPath();
       dc.moveTo(140, 1120);
       dc.lineTo(2060, 1120);
       dc.stroke();
-      posterText(dc, brand.subtitle, 140, 1195, 47, "#173632", true);
-      posterText(
+      homeText(dc, brand.subtitle, 140, 1195, 47, "#f4f4f2", true);
+      homeText(
         dc,
         "IMMERSIVE MINDFUL FOCUS & HEALING EXPERIENCE",
         140,
         1250,
         25,
-        "#173632",
+        "#f4f4f2",
         true,
       );
-      posterText(dc, "24 SPACES / ONE INNER WORLD", 1480, 1240, 24);
+      homeText(dc, "24 SPACES / ONE INNER WORLD", 1480, 1240, 24);
     } else if (d.kind === "free") {
       label("FOLLOW YOUR OWN RHYTHM", 730, 190, 22);
       label("EMOTIONAL FORM / 意境预览", 1500, 470, 22);
