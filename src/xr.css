@@ -1,0 +1,120 @@
+#vr-entry {
+  padding: 0 14px;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #c6f4e7;
+}
+.xr-dialog {
+  width: min(440px, calc(100vw - 40px));
+  padding: 28px;
+  color: #eaf1f7;
+  background: #1a2030;
+  border: 1px solid #55657b;
+  border-radius: 20px;
+  box-shadow: 0 25px 100px #0008;
+}
+.xr-dialog::backdrop {
+  background: #090d18b8;
+  backdrop-filter: blur(12px);
+}
+.xr-dialog h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+.xr-dialog p {
+  line-height: 1.7;
+  font-size: 14px;
+}
+.xr-dialog small {
+  display: block;
+  color: #aab9cc;
+  line-height: 1.9;
+  margin-top: 20px;
+}
+.xr-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.xr-dialog button {
+  border: 1px solid #657788;
+  border-radius: 10px;
+  padding: 10px 16px;
+  background: #314653;
+  color: #edf9f5;
+  cursor: pointer;
+}
+.xr-dialog button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.xr-dialog button:focus-visible {
+  outline: 2px solid #bdf3df;
+  outline-offset: 3px;
+}
+html[data-xr="true"] .bottom-dock > :not(#vr-entry) {
+  display: none;
+}
+html[data-xr="true"] .topbar,
+html[data-xr="true"] .bottom-left,
+html[data-xr="true"] .settings-panel,
+html[data-xr="true"] .items-panel,
+html[data-xr="true"] #object-tooltip {
+  visibility: hidden;
+}
+
+#ui-layer #vr-entry {
+  width: auto;
+  min-width: 74px;
+  padding: 0 14px;
+}
+html[data-xr="true"] #ui-layer > :not(.global-controls) {
+  visibility: hidden;
+}
+html[data-xr="true"] .global-controls > :not(#vr-entry) {
+  display: none;
+}
+
+/* One fixed entry shared by home, sensing, selection and room pages. */
+body > #vr-entry {
+  position: fixed;
+  left: max(20px, env(safe-area-inset-left));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 1200;
+  width: auto;
+  min-width: 94px;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #b7dfdc44;
+  border-radius: 22px;
+  background: #19252ccc;
+  color: #d7f3eb;
+  backdrop-filter: blur(18px);
+  cursor: pointer;
+}
+html:not([data-xr="true"]) .global-controls {
+  left: max(132px, calc(env(safe-area-inset-left) + 132px));
+}
+@media (max-width: 700px) {
+  html:not([data-xr="true"]) .global-controls {
+    left: 24px;
+    bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
+  }
+}
+.home-xr-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+}
+html[data-home-xr="true"] .home-shell {
+  visibility: hidden;
+}
+
+html[data-home-xr='true'],
+html[data-home-xr='true'] body {
+  overflow: hidden;
+}
+

@@ -1,0 +1,71 @@
+// A single presentation order shared by the guide, chevrons and scene counter.
+export const moodOrder = [
+  "ruya",
+  "dongfang",
+  "palace",
+  "tibetan",
+  "uyghur",
+  "machiya",
+  "wabisabi",
+  "tropical",
+  "athens",
+  "baroque",
+  "french",
+  "mediterranean",
+  "renaissance",
+  "artdeco",
+  "bauhaus",
+  "brutalist",
+  "industrial",
+  "midcentury",
+  "memphis",
+  "bohemian",
+  "nordic",
+  "italian",
+  "classic",
+  "studio",
+];
+
+export const moodGroups = [
+  {
+    name: "国风与东方",
+    caption: "木色、禅意与山海",
+    scenes: [
+      "ruya",
+      "dongfang",
+      "palace",
+      "tibetan",
+      "uyghur",
+      "machiya",
+      "wabisabi",
+      "tropical",
+    ],
+  },
+  {
+    name: "西方古典与浪漫",
+    caption: "时光深处的温柔",
+    scenes: ["athens", "baroque", "french", "mediterranean", "renaissance"],
+  },
+  {
+    name: "近现代设计流派",
+    caption: "秩序与自由的对话",
+    scenes: [
+      "artdeco",
+      "bauhaus",
+      "industrial",
+      "brutalist",
+      "midcentury",
+      "memphis",
+    ],
+  },
+  {
+    name: "当代潮流与生活",
+    caption: "日常，也可以是风景",
+    scenes: ["italian", "nordic", "bohemian"],
+  },
+  {
+    name: "功能与生活空间",
+    caption: "回到自己的小天地",
+    scenes: ["studio", "classic"],
+  },
+];
