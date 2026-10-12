@@ -118,3 +118,10 @@ html[data-home-xr='true'] body {
   overflow: hidden;
 }
 
+
+/* Home owns its third entry; intermediate selection/sensing pages have none. */
+body:has(.home-shell) > #vr-entry { display: none; }
+#ui-layer #vr-entry { width: 42px; min-width: 42px; height: 42px; padding: 0; border-radius: 50%; color: #d2cbc7; }
+#ui-layer #vr-entry svg { width: 18px; height: 18px; }
+html:not([data-xr="true"]) .global-controls { left: var(--safe-left); bottom: var(--safe-bottom); }
+@media (max-width: 700px) { #ui-layer #vr-entry { width: 36px; min-width: 36px; height: 36px; } }

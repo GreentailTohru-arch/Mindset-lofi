@@ -2147,3 +2147,5 @@ progress::-webkit-progress-value {
  .reference-choice b { right: 15px; top: 20px; font-size: 18px; }
  .reference-choice em { right: 18px; bottom: 15px; font-size: 9px; }
 }
+
+@media (max-width: 800px) { .reference-entry { grid-template-columns: 1fr; } }

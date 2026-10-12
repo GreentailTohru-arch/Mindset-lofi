@@ -44,6 +44,7 @@ export function mountHome() {
         <div class="reference-entry">
           <button id="free-mode" class="reference-choice"><span>自由选择</span><small>FREE EXPLORATION</small><b aria-hidden="true">↗</b></button>
           <button id="sense-mode" class="reference-choice"><span>感应选择</span><small>FOLLOW YOUR FEELING</small><b aria-hidden="true">↗</b><em>模拟体验</em></button>
+          <button id="home-vr-trigger" class="reference-choice"><span>VR 空间</span><small>IMMERSIVE VR</small><b aria-hidden="true">↗</b></button>
         </div>
       </section>
       <section id="free-view" class="subview" hidden><div class="view-heading"><div><p class="overline">FOLLOW YOUR OWN RHYTHM</p><h2>此刻，想去哪里？</h2><p>选择一处意境，开启自己的专注时光。</p></div><button class="quiet-button" data-back>返回首页</button></div><div class="scene-grid">${emotionScenes.map((s, i) => `<a class="scene-choice" href="?scene=${s.id}"><span>${String(i + 1).padStart(2, "0")}</span><h3>${s.name}</h3><p>${s.emotion}</p><span class="scene-enter">进入空间 ↗</span></a>`).join("")}</div></section>
@@ -291,6 +292,7 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
       pause: stop,
     },
   });
+  el("home-vr-trigger").onclick = () => el("vr-entry").click();
   window.addEventListener("pageshow", (event) => {
     if (event.persisted && el("sense-view") && !el("sense-view").hidden) {
       reset();

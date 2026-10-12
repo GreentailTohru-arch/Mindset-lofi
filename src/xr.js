@@ -1031,7 +1031,7 @@ export function createVR({
     needsPlacement = !preview;
     refresh();
     document.documentElement.dataset.xr = "true";
-    entry.textContent = "退出空间模式";
+    setEntryLabel("退出空间模式");
     place();
     if (preview) {
       camera.rotation.x = home && currentId === sceneId ? 0 : -0.17;
@@ -1068,7 +1068,7 @@ export function createVR({
     interaction.setEnabled(true);
     interaction.clear();
     delete document.documentElement.dataset.xr;
-    entry.textContent = "VR 空间";
+    setEntryLabel("VR 空间");
     focus = null;
     home?.onActive?.(false);
     onExit?.();
@@ -1080,13 +1080,20 @@ export function createVR({
   const sessionStart = () => begin(false);
   renderer.xr.addEventListener("sessionstart", sessionStart);
   renderer.xr.addEventListener("sessionend", finish);
+  function setEntryLabel(value) {
+    entry.ariaLabel = value;
+    if (home) entry.textContent = value;
+    else entry.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3l-3-3h-2l-3 3H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><circle cx="8" cy="11" r="2"/><circle cx="16" cy="11" r="2"/></svg>';
+  }
   const entry = document.createElement("button");
   entry.id = "vr-entry";
   entry.type = "button";
-  entry.textContent = "VR 空间";
+  setEntryLabel("VR 空间");
   entry.title = "进入双眼立体空间，或预览空间菜单";
   entry.className = "glass control-button";
-  document.body.append(entry);
+  const roomControls = !home && document.querySelector?.("#ui-layer .global-controls");
+  if (roomControls?.prepend) roomControls.prepend(entry);
+  else document.body.append(entry);
   const dialog = document.createElement("dialog");
   dialog.className = "xr-dialog";
   dialog.innerHTML = `<h2>走进立体小屋</h2><p>双眼立体场景、悬浮菜单与手柄互动。</p><p class="xr-support"></p><div class="xr-dialog-actions"><button data-enter>进入 VR</button><button data-preview>空间预览</button><button data-close>返回</button></div><small>手柄：指向后扣扳机，握键收起 / 呼出菜单。<br>无手柄时：注视按钮约 1.5 秒触发。Quest 3：左摇杆移动、右摇杆分段转向。<br>漫游可选舒适传送 / 手柄移动 / 混合；空地按住扳机圈选，松开传送。<br>空间预览：WASD 行走，方向键转向，Esc 退出。</small>`;
