@@ -1,3 +1,4 @@
+import { posterMarkup } from "./poster-art.js";
 import { brand } from "./brand.js";
 import { emotionScenes, randomEmotion } from "./emotion-scenes.js";
 import { startEmotionArt } from "./emotion-art.js";
@@ -38,22 +39,12 @@ export function mountHome() {
   document.title = "心境LOFI · 专注空间疗愈";
   document.querySelector("#app").innerHTML = `
     <main class="home-shell" data-view="home">
-      <header class="home-header"><a href="./" class="home-brand">心境<span>LOFI</span></a><span class="home-note">回归本真 · Reconnect Your True Self</span><span class="edition">A SPACE FOR YOUR MIND</span></header>
-      <section id="home-intro" class="home-intro poster-home" aria-label="心境 LOFI 首页">
-        <div class="poster-hero">
-          <p class="poster-kicker">MINDSET OF LO-FI <span>沉浸式空间体验 / 01</span></p>
-          <h1><img src="${brand.wordmark}" alt="心境"/><span class="sr-only">LOFI</span></h1>
-          <div class="poster-lockup"><img src="${brand.symbol}" alt=""/><p>THE<br><strong>MINDSET</strong><br>OF LOW FIDELITY</p></div>
-          <div class="poster-slogan"><span>${brand.slogan}</span><p>Reconnect<br>Your True Self</p></div>
+      <section id="home-intro" class="home-intro reference-home" aria-label="心境 LOFI 首页">
+        <div class="reference-art">${posterMarkup()}</div>
+        <div class="reference-entry">
+          <button id="free-mode" class="reference-choice"><span>自由选择</span><small>FREE EXPLORATION</small><b aria-hidden="true">↗</b></button>
+          <button id="sense-mode" class="reference-choice"><span>感应选择</span><small>FOLLOW YOUR FEELING</small><b aria-hidden="true">↗</b><em>模拟体验</em></button>
         </div>
-        <div class="poster-paths">
-          <div class="poster-intro"><span class="overline">A ROOM FOR EVERY STATE OF MIND</span><h2>让此刻，<br>有处安放。</h2><p>从一处风景开始，或跟随内心的频率。<br>慢慢停留，让空间回应你的心情。</p></div>
-          <div class="mode-grid">
-            <button id="free-mode" class="mode-card"><span class="mode-number">01 / EXPLORE</span><h3>自由选择 <span>↗</span></h3><p>二十四种意境，随心而往。</p><span class="mode-action">挑选一处风景 <span>FIND YOUR SPACE</span></span></button>
-            <button id="sense-mode" class="mode-card"><span class="mode-number">02 / RESONATE <small>模拟体验</small></span><h3>感应选择 <span>↗</span></h3><p>感受此刻的心情，回应内在的情绪。</p><span class="mode-action">感受我的心境 <span>FOLLOW YOUR FEELING</span></span></button>
-          </div>
-        </div>
-        <footer class="poster-footer"><div><p>${brand.subtitle}</p><span>Immersive Mindful Focus and Healing Experience</span></div><span class="brand-credits">Powered by EGG × VR<br>mindset of lo-fi &amp; Tomatotodo</span></footer>
       </section>
       <section id="free-view" class="subview" hidden><div class="view-heading"><div><p class="overline">FOLLOW YOUR OWN RHYTHM</p><h2>此刻，想去哪里？</h2><p>选择一处意境，开启自己的专注时光。</p></div><button class="quiet-button" data-back>返回首页</button></div><div class="scene-grid">${emotionScenes.map((s, i) => `<a class="scene-choice" href="?scene=${s.id}"><span>${String(i + 1).padStart(2, "0")}</span><h3>${s.name}</h3><p>${s.emotion}</p><span class="scene-enter">进入空间 ↗</span></a>`).join("")}</div></section>
       <section id="wear-view" class="wear-view" hidden>

@@ -1,3 +1,4 @@
+import { posterAssets } from "./poster-art.js";
 // Shared identity, adapted independently for a screen and a room-sized surface.
 export const brand = {
   wordmark: "./images/brand/mindset-wordmark.png",
@@ -10,13 +11,13 @@ export const brand = {
 export function loadBrandImages(redraw) {
   const images = {};
   if (typeof Image === "undefined") return images;
-  for (const key of ["wordmark", "symbol"]) {
+  for (const key of ["wordmark", "symbol", ...Object.keys(posterAssets)]) {
     const image = new Image();
     image.onload = () => {
       images[key] = image;
       redraw();
     };
-    image.src = brand[key];
+    image.src = brand[key] || posterAssets[key];
   }
   if (typeof document !== "undefined" && document.fonts?.load) {
     Promise.all([

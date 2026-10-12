@@ -1,3 +1,4 @@
+import { drawReferencePoster } from "./poster-art.js";
 import { loadBrandImages, brandWordmark, posterText, brand } from "./brand.js";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
@@ -133,7 +134,7 @@ export function mountHomeVR({ read, actions }) {
   });
   back.group.position.set(-1.72, 1.16, 0.09);
   const exit = button(0.56, 0.17, "退出 VR", () => vr.exit());
-  exit.group.position.set(-1.75, -1.2, 0.09);
+  exit.group.position.set(-1.75, -1.55, 0.09);
   const slots = Array.from({ length: 6 }, () =>
     button(1.24, 0.3, "", () => {}),
   );
@@ -232,7 +233,7 @@ export function mountHomeVR({ read, actions }) {
       dc.textAlign = "left";
       dc.fillText(value, x, y);
     };
-    if (d.kind === "home") label("心境 LOFI", 100, 90, 30, "#eee9df");
+
     label("A SPACE FOR YOUR MIND", 1650, 90, 21);
     dc.strokeStyle = "#c8bfd52b";
     dc.beginPath();
@@ -240,94 +241,21 @@ export function mountHomeVR({ read, actions }) {
     dc.lineTo(2100, 120);
     dc.stroke();
     if (d.kind === "home") {
-      const homeText = (ctx, text, x, y, size, color = "#c3c7ce", serif = false) => posterText(ctx, text, x, y, size, color, serif);
-      const gradient = dc.createLinearGradient(0, 0, 2000, 1400);
-      gradient.addColorStop(0, "#08090b");
-      gradient.addColorStop(0.65, "#0b0c0f");
-      gradient.addColorStop(1, "#08090b");
-      dc.fillStyle = gradient;
+      dc.fillStyle = "#08090b";
       dc.fillRect(0, 0, 2200, 1400);
-      homeText(dc, "MINDSET OF LO-FI", 140, 100, 28);
-      homeText(dc, "沉浸式空间体验 / VR EDITION", 1500, 100, 28);
-      dc.strokeStyle = "#ffffff44";
-      dc.beginPath();
-      dc.moveTo(140, 145);
-      dc.lineTo(2060, 145);
-      dc.stroke();
-      brandWordmark(dc, brandImages, 140, 240, 940, true);
-      if (brandImages.symbol) {
-        dc.save();
-        dc.filter = "invert(1)";
-        dc.drawImage(brandImages.symbol, 125, 640, 275, 129);
-        dc.restore();
-      }
-      homeText(dc, "THE MINDSET", 440, 670, 83, "#f4f4f2", true);
-      homeText(dc, "OF LOW FIDELITY", 440, 748, 57, "#f4f4f2", true);
-      homeText(dc, brand.slogan, 140, 968, 83, "#f4f4f2", true);
-      homeText(dc, "Reconnect", 590, 930, 32, "#f4f4f2", true);
-      homeText(dc, "Your True Self", 590, 980, 32, "#f4f4f2", true);
-      dc.beginPath();
-      dc.moveTo(1230, 240);
-      dc.lineTo(1230, 1050);
-      dc.stroke();
-      homeText(dc, "让此刻，有处安放。", 1340, 265, 52, "#f4f4f2", true);
-      homeText(dc, "A ROOM FOR EVERY STATE OF MIND", 1340, 320, 23);
+      drawReferencePoster(dc, brandImages, 145, 30, 940, 1329);
       [400, 740].forEach((y, i) => {
-        dc.fillStyle = "#ffffff09";
-        dc.beginPath();
-        dc.roundRect(1340, y, 720, 285, 16);
-        dc.fill();
-        dc.strokeStyle = "#ffffff66";
-        dc.stroke();
-        homeText(
-          dc,
-          i ? "02 / RESONATE · 模拟体验" : "01 / EXPLORE",
-          1385,
-          y + 52,
-          25,
-        );
-        homeText(
-          dc,
-          i ? "感应选择" : "自由选择",
-          1385,
-          y + 128,
-          55,
-          "#f4f4f2",
-          true,
-        );
-        homeText(dc, "↗", 1960, y + 128, 46);
-        homeText(
-          dc,
-          i ? "感受心境，遇见属于你的空间。" : "二十四种意境，随心而往。",
-          1385,
-          y + 195,
-          29,
-        );
-        homeText(
-          dc,
-          i ? "FOLLOW YOUR FEELING" : "FIND YOUR SPACE",
-          1385,
-          y + 247,
-          22,
-        );
+        dc.fillStyle = "#ffffff08";
+        dc.strokeStyle = "#ffffff44";
+        dc.beginPath(); dc.roundRect(1340, y, 720, 285, 8); dc.fill(); dc.stroke();
+        dc.fillStyle = "#f4f4f2";
+        dc.font = '48px "Microsoft YaHei", sans-serif';
+        dc.fillText(i ? "感应选择" : "自由选择", 1390, y + 112);
+        dc.font = '24px "Microsoft YaHei", sans-serif';
+        dc.fillText(i ? "FOLLOW YOUR FEELING" : "FREE EXPLORATION", 1390, y + 195);
+        dc.fillText("↗", 1960, y + 112);
+        if (i) { dc.fillStyle = "#999"; dc.font = '20px "Microsoft YaHei", sans-serif'; dc.fillText("模拟体验", 1910, y + 245); }
       });
-      dc.strokeStyle = "#ffffff55";
-      dc.beginPath();
-      dc.moveTo(140, 1120);
-      dc.lineTo(2060, 1120);
-      dc.stroke();
-      homeText(dc, brand.subtitle, 140, 1195, 47, "#f4f4f2", true);
-      homeText(
-        dc,
-        "Immersive Mindful Focus and Healing Experience",
-        140,
-        1250,
-        25,
-        "#f4f4f2",
-        true,
-      );
-      homeText(dc, "Powered by EGG × VR", 1480, 1195, 28);
-      homeText(dc, "mindset of lo-fi & Tomatotodo", 1480, 1240, 24);
     } else if (d.kind === "free") {
       label("FOLLOW YOUR OWN RHYTHM", 730, 190, 22);
       label("EMOTIONAL FORM / 意境预览", 1500, 470, 22);
