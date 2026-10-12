@@ -1,3 +1,4 @@
+import { createFreeXR } from './free-xr.js';
 import { createAnimationAtlases } from "./gif-atlas.js";
 import { drawReferencePoster } from "./poster-art.js";
 import { loadBrandImages, brandWordmark, posterText, brand } from "./brand.js";
@@ -212,7 +213,7 @@ export function mountHomeVR({ read, actions }) {
   design.position.z = 0.045;
   root.add(design);
   resources.push(designTexture, designMaterial, designGeometry);
-  const detail = text(1.2, 0.65, 55);
+  const detail = text(1.2, 0.82, 80);
   detail.position.set(1.38, -0.03, 0.12);
   root.add(detail);
   const enter = button(
@@ -223,6 +224,8 @@ export function mountHomeVR({ read, actions }) {
   );
   enter.group.position.set(1.38, -0.65, 0.13);
   let selectedScene = null;
+  const freeSpace = createFreeXR({ root, registry, resources, text, select: s => { selectedScene = s; } });
+  freeSpace.group.visible = false;
   const stars = new THREE.BufferGeometry();
   const starPositions = [];
   for (let i = 0; i < 160; i++)
@@ -271,40 +274,6 @@ export function mountHomeVR({ read, actions }) {
       dc.fillStyle = "#08090b";
       dc.fillRect(0, 0, 2200, 1400);
       drawReferencePoster(dc, brandImages, 145, 30, 940, 1329);
-    } else if (d.kind === "free") {
-      label("FOLLOW YOUR OWN RHYTHM", 730, 190, 22);
-      label("EMOTIONAL FORM / 意境预览", 1500, 470, 22);
-      dc.strokeStyle = "#b7abd340";
-      const pts = [
-        [-1.48, 0.3],
-        [-0.6, 0.45],
-        [-1.1, -0.12],
-        [-0.1, 0.0],
-        [-1.48, -0.62],
-        [-0.45, -0.55],
-      ];
-      const xy = ([x, y]) => [1100 + x * 500, 700 - y * 500];
-      for (let i = 0; i < pts.length; i++) {
-        const a = xy(pts[i]),
-          b = xy(pts[(i + 1) % pts.length]);
-        dc.beginPath();
-        dc.moveTo(...a);
-        dc.lineTo(...b);
-        dc.stroke();
-      }
-      for (let i = 0; i < 85; i++) {
-        dc.fillStyle = "#ccc2eb55";
-        dc.beginPath();
-        dc.arc(
-          170 + ((i * 139) % 1240),
-          420 + ((i * 79) % 650),
-          (i % 3) + 1,
-          0,
-          Math.PI * 2,
-        );
-        dc.fill();
-      }
-      label("指向星点并选择，预览心境后进入空间", 550, 1195, 26);
     }
     designTexture.needsUpdate = true;
   }
@@ -331,37 +300,41 @@ export function mountHomeVR({ read, actions }) {
       const free = description.kind === "free",
         home = description.kind === "home";
       detail.visible = enter.group.visible = free;
-      if (
-        free &&
-        !description.choices.some((c) => c.scene === selectedScene?.id)
-      )
-        selectedScene = emotionScenes.find(
-          (s) => s.id === description.choices[0].scene,
-        );
+      if (free && !selectedScene) selectedScene = emotionScenes[0];
+      freeSpace.group.visible = free;
+      scene.background.set(free ? 0x030505 : 0x101522);
       if (free)
         detail.userData.draw(
           `${selectedScene.name}\n${selectedScene.emotion}\n\n${selectedScene.description.match(/.{1,14}/gu)?.join("\n")}`,
         );
       const illustrated = Boolean(description.image);
       title.visible = copy.visible = !home;
-      backdrop.visible = rim.visible = home || free;
+      backdrop.visible = rim.visible = home;
       guidePlate.visible = illustrated;
       halo.visible = pedestal.visible = illustrated;
-      design.visible = home || free;
+      design.visible = home;
       title.userData.draw(description.title);
-      copy.userData.draw(description.copy);
+      copy.userData.draw(free ? "选择一颗星，找到此刻的心境" : description.copy);
       media.visible = illustrated;
       title.position.y = illustrated ? -0.32 : home ? 0.68 : 0.87;
       title.position.z = illustrated ? 0.24 : 0.08;
       copy.position.y = illustrated ? -0.57 : home ? 0.23 : 0.6;
       copy.position.z = illustrated ? 0.13 : 0.08;
       back.group.visible = description.kind !== "home";
-      exit.restZ = home ? 0.28 : -0.10;
-      exit.group.position.set(home ? 1.55 : -1.75, home ? -1.07 : -1.4, exit.restZ);
-      previous.group.visible = next.group.visible = description.kind === "free";
+      exit.restZ = home || free ? 0.28 : -0.10;
+      exit.group.position.set(home || free ? 1.55 : -1.75, home || free ? -1.07 : -1.4, exit.restZ);
+      previous.group.visible = next.group.visible = false;
+      if (free) {
+        title.position.set(0,1.15,.05);
+        copy.position.set(0,.94,.05);
+        detail.position.set(1.58,.13,.27); detail.scale.setScalar(.78);
+        enter.group.position.set(1.58,-.64,.28); enter.restZ=.28;
+        enter.group.scale.setScalar(.78);
+        back.group.position.set(-1.70,1.13,.28); back.restZ=.28;
+      }
       slots.forEach((slot, i) => {
         const choice = description.choices[i];
-        slot.group.visible = Boolean(choice);
+        slot.group.visible = !free && Boolean(choice);
         if (!choice) return;
         slot.face.userData.draw(
           choice.label,
@@ -410,6 +383,7 @@ export function mountHomeVR({ read, actions }) {
         if (illustrated) slot.group.scale.set(1.4,1.2,1);
       });
     }
+    if (description.kind === "free") freeSpace.update(dt,selectedScene,vr.focusedObject);
     mediaTime += dt;
     const source = description.image && state[description.image];
     const sourceURL = source?.currentSrc || source?.src || "";
