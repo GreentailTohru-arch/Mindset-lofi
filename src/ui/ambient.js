@@ -1,3 +1,4 @@
+import { posterAssets } from "./poster-art.js";
 import { brand } from "./brand.js";
 import { sceneStories } from "./scene-stories.js";
 import { createAmbientAudio } from "./audio.js";
@@ -40,7 +41,7 @@ export function mountAmbientUI({ notify, store }) {
     "afterbegin",
     `
     <header class="greeting scene-identity">
-      <a class="identity-lockup" href="./" aria-label="返回心境LOFI首页"><img src="${brand.wordmark}" alt="心境"/><span>THE MINDSET<br><em>OF LOW FIDELITY</em></span></a>
+      <a class="identity-lockup" href="./" aria-label="返回心境LOFI首页"><img src="${posterAssets.posterLockup}" alt="心境 · The Mindset of Low Fidelity"/></a>
     </header>
     <nav class="scene-navigation" aria-label="场景导览">
       <a id="previous-scene" class="scene-arrow scene-arrow-left" aria-label="上一个场景">${chevron(-1)}<span class="nav-caption">上一处</span></a>
@@ -55,7 +56,7 @@ export function mountAmbientUI({ notify, store }) {
     </section>
     <nav class="global-controls" aria-label="全局控制">
       <button id="audio-toggle" class="glass control-button" aria-label="播放背景音乐" title="播放背景音乐 · 轻柔和弦" aria-pressed="false"><span class="audio-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
-      <button id="zen-toggle" class="glass control-button" aria-label="隐藏全部界面" title="沉浸模式 · 移动鼠标或按任意键恢复">${eye}</button>
+      <button id="zen-toggle" class="glass control-button" aria-label="开启沉浸模式" aria-pressed="false" title="沉浸模式 · 再次点击恢复信息">${eye}</button>
     </nav>`,
   );
 
@@ -296,15 +297,19 @@ export function mountAmbientUI({ notify, store }) {
   });
 
   let zen = root.dataset.clean === "true";
-  let zenAt = 0,
-    origin = null;
-  layer.inert = zen;
+  layer.inert = false;
+  const updateZenButton = () => {
+    el("zen-toggle").setAttribute("aria-pressed", String(zen));
+    el("zen-toggle").setAttribute("aria-label", zen ? "关闭沉浸模式" : "开启沉浸模式");
+  };
+  updateZenButton();
   const restoreUI = () => {
     if (!zen) return;
     zen = false;
     root.dataset.clean = "false";
     layer.inert = false;
     layer.removeAttribute("aria-hidden");
+    updateZenButton();
     const url = new URL(location.href);
     url.searchParams.delete("clean");
     history.replaceState(null, "", url);
@@ -314,38 +319,25 @@ export function mountAmbientUI({ notify, store }) {
       link.href = destination.href;
     }
   };
-  el("zen-toggle").onclick = (event) => {
+  el("zen-toggle").onclick = () => {
+    if (zen) { restoreUI(); return; }
     mood?.close();
-    document.activeElement?.blur();
+    setTodo(false);
+    expand(false);
     zen = true;
-    zenAt = performance.now();
-    origin = { x: event.clientX, y: event.clientY };
-    layer.inert = true;
-    layer.setAttribute("aria-hidden", "true");
     root.dataset.clean = "true";
+    updateZenButton();
   };
-  document.addEventListener("pointermove", (event) => {
-    if (!zen || performance.now() - zenAt < 300) return;
-    if (
-      !origin ||
-      Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 6
-    )
-      restoreUI();
-  });
-  document.addEventListener(
-    "pointerdown",
-    () => {
-      if (zen) restoreUI();
-    },
-    true,
-  );
   document.addEventListener(
     "keydown",
     (event) => {
       if (zen) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        restoreUI();
+        if (event.key === "Escape") {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          restoreUI();
+          el("zen-toggle").focus();
+        }
         return;
       }
       if (event.key === "Escape") {

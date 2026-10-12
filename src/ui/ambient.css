@@ -624,9 +624,10 @@
   transform: translate(-50%, 0);
 }
 
-html[data-clean="true"] #ui-layer {
-  opacity: 0;
-}
+html[data-clean="true"] #ui-layer { opacity: 1; }
+html[data-clean="true"] #ui-layer > :not(.global-controls),
+html[data-clean="true"] .global-controls > :not(#zen-toggle) { visibility: hidden; }
+html[data-clean="true"] #ui-layer #zen-toggle { visibility: visible; pointer-events: auto !important; }
 html[data-clean="true"] #ui-layer,
 html[data-clean="true"] #ui-layer * {
   pointer-events: none !important;
@@ -991,3 +992,6 @@ html[data-scene] #experience.themed-experience {
 
 /* Minimal scene signature, floating directly over the model. */
 #ui-layer .scene-identity { width: auto; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; }
+
+.identity-lockup img { width: 250px; max-width: 100%; }
+@media (max-width: 700px) { .identity-lockup img { width: 180px; } }
