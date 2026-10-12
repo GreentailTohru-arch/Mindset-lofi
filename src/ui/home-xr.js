@@ -47,7 +47,7 @@ export function mountHomeVR({ read, actions }) {
   const rim = card(4.44, 2.84, 0xaca7c3, 0.18);
   rim.position.z = -0.055;
   root.add(rim);
-  function text(w, h, font = 42) {
+  function text(w, h, font = 42, isButton = false) {
     const canvas = document.createElement("canvas");
     canvas.width = 1400;
     canvas.height = Math.round((1400 * h) / w);
@@ -69,7 +69,7 @@ export function mountHomeVR({ read, actions }) {
       last = value;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#edf6f4";
-      ctx.font = `500 ${font * (w < 1 ? 2.1 : 1.35)}px "Microsoft YaHei", sans-serif`;
+      ctx.font = `500 ${font * (w < 1 ? 2.1 : 1.35)}px ${isButton ? '"Microsoft YaHei", sans-serif' : '"Mindset Times", "Mindset Qingke", serif'}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const lines = String(value).split("\n");
@@ -83,6 +83,11 @@ export function mountHomeVR({ read, actions }) {
       );
       texture.needsUpdate = true;
     };
+    if (!isButton && document.fonts?.load) {
+      Promise.all([document.fonts.load('16px "Mindset Times"'), document.fonts.load('16px "Mindset Qingke"')]).then(() => {
+        const value = last; last = undefined; mesh.userData.draw(value || "");
+      });
+    }
     return mesh;
   }
   const title = text(2.5, 0.2, 69);
@@ -110,7 +115,7 @@ export function mountHomeVR({ read, actions }) {
   function button(w, h, label, action) {
     const group = new THREE.Group();
     const body = card(w, h, 0x355963, 0.78);
-    const face = text(w - 0.04, h - 0.02, 72);
+    const face = text(w - 0.04, h - 0.02, 72, true);
     face.position.z = 0.05;
     face.userData.draw(label);
     group.add(body, face);
@@ -222,7 +227,7 @@ export function mountHomeVR({ read, actions }) {
     dc.fillStyle = glow;
     dc.fillRect(0, 0, 2200, 1400);
     const label = (value, x, y, size = 24, color = "#b9b5c8") => {
-      dc.font = `${size}px "Microsoft YaHei",sans-serif`;
+      dc.font = `${size}px "Mindset Times", "Mindset Qingke", serif`;
       dc.fillStyle = color;
       dc.textAlign = "left";
       dc.fillText(value, x, y);

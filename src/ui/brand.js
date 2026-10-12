@@ -55,8 +55,8 @@ export function posterText(
   const family = text === brand.subtitle ? '"Mindset Qingke", SimSun, serif'
     : text === brand.slogan ? '"Mindset Song", SimSun, "Songti SC", serif'
     : /Powered by|Tomatotodo/i.test(text) ? '"Mindset Samsung", sans-serif'
-    : /[A-Za-z]/.test(text) ? '"Mindset Times", "Times New Roman", serif'
-    : serif ? 'SimSun, serif' : '"Microsoft YaHei", sans-serif';
+    : /[A-Za-z]/.test(text) ? '"Mindset Times", "Mindset Qingke", serif'
+    : '"Mindset Qingke", serif';
   ctx.font = `400 ${size}px ${family}`;
   ctx.textAlign = "left";
   ctx.textBaseline = "alphabetic";

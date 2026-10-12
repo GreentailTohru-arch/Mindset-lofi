@@ -162,7 +162,7 @@ export function createVR({
     material.depthTest = false;
     return mesh;
   }
-  function label(w, h, text, fontSize = 34) {
+  function label(w, h, text, fontSize = 34, isButton = false) {
     const canvas = document.createElement("canvas");
     canvas.width = 1024;
     canvas.height = Math.round((1024 * h) / w);
@@ -186,12 +186,12 @@ export function createVR({
       const ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = tint;
-      ctx.font = `500 ${Math.round(canvas.height * (fontSize >= 30 ? 0.52 : 0.48))}px "Microsoft YaHei", sans-serif`;
+      ctx.font = `500 ${Math.round(canvas.height * (fontSize >= 30 ? 0.52 : 0.48))}px ${isButton ? '"Microsoft YaHei", sans-serif' : '"Mindset Times", "Mindset Qingke", serif'}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const lines = String(value).split("\n");
       if (lines.length > 1)
-        ctx.font = `500 ${Math.round((canvas.height / lines.length) * 0.4)}px "Microsoft YaHei", sans-serif`;
+        ctx.font = `500 ${Math.round((canvas.height / lines.length) * 0.4)}px ${isButton ? '"Microsoft YaHei", sans-serif' : '"Mindset Times", "Mindset Qingke", serif'}`;
       lines.forEach((line, i) =>
         ctx.fillText(
           line,
@@ -203,6 +203,12 @@ export function createVR({
       texture.needsUpdate = true;
     };
     mesh.userData.draw(text);
+    if (!isButton && document.fonts?.load) {
+      Promise.all([document.fonts.load('16px "Mindset Times"'), document.fonts.load('16px "Mindset Qingke"')]).then(() => {
+        const value = previousText, tint = previousTint;
+        previousText = undefined; mesh.userData.draw(value, tint);
+      });
+    }
     return mesh;
   }
   const back = box(1.2, 1.06, 0.09, 0x283443);
@@ -246,7 +252,7 @@ export function createVR({
     const group = new THREE.Group();
     group.position.set(x, y, 0.082);
     const body = box(w, 0.092, 0.026, color.card);
-    const face = label(w - 0.01, 0.076, text, 29);
+    const face = label(w - 0.01, 0.076, text, 29, true);
     face.position.z = 0.015;
     group.add(body, face);
     parent.add(group);

@@ -1544,7 +1544,7 @@ progress::-webkit-progress-value {
 .cloud-preview {
   position: fixed;
   top: 47%;
-  width: clamp(160px, 15vw, 250px);
+  width: clamp(220px, 21vw, 360px);
   z-index: 5;
   padding: 20px;
   pointer-events: none;
@@ -1620,7 +1620,7 @@ progress::-webkit-progress-value {
 }
 @media (min-width: 1000px) {
   .scene-cloud {
-    width: 72%;
+    width: 58%;
     margin: 0 auto;
   }
 }
@@ -1629,7 +1629,7 @@ progress::-webkit-progress-value {
     top: auto;
     bottom: 20px;
     width: 43vw;
-    max-width: 250px;
+    max-width: 340px;
     padding: 12px;
     transform: translateY(8px);
   }
@@ -2115,3 +2115,11 @@ progress::-webkit-progress-value {
 .poster-home h1 > img, .poster-lockup img { filter: invert(1); }
 .home-shell[data-view="home"]::before { background: none; opacity: 0; }
 .poster-home .mode-card:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+
+@media (min-width: 1000px) {
+  .cloud-preview { padding: clamp(22px, 2vw, 32px); }
+  .preview-title { font-size: clamp(26px, 2.3vw, 36px); }
+  .preview-feeling { font-size: 14px; }
+  .preview-description { font-size: 15px; line-height: 1.9; }
+  .preview-art-canvas { margin: 20px 0; }
+}
