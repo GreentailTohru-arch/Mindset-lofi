@@ -78,6 +78,7 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
   );
   createIcons({ icons: { PersonStanding, Headphones } });
   document.querySelector(".emotion-caption").append(el("arousal"));
+  let virtualMode = false;
   let guideStage = 0,
     view = "home",
     homeVR = null;
@@ -152,7 +153,8 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
     show("free");
     el("free-view").querySelector("a").focus({ preventScroll: true });
   };
-  el("sense-mode").onclick = () => {
+  function startGuide(useVR = false) {
+    virtualMode = useVR;
     guideStage = 0;
     el("guide-icon").innerHTML =
       '<img src="./images/person-enter-v2.gif" alt="走近心境房间示意动画"/>';
@@ -163,6 +165,7 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
     show("wear");
     el("wear-confirm").focus({ preventScroll: true });
   };
+  el("sense-mode").onclick = () => startGuide(false);
   el("wear-confirm").onclick = () => {
     if (guideStage === 0) {
       guideStage = 1;
@@ -175,14 +178,20 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
       el("wear-confirm").textContent = "准备好了 / BEGIN SIMULATION";
       return;
     }
-    if (guideStage === 1 && homeVR?.active) {
+    if (guideStage === 1 && (virtualMode || homeVR?.active)) {
       guideStage = 2;
       el("guide-icon").innerHTML =
         '<img src="./images/vr-put-on-white-transparent.gif" alt="佩戴 VR 设备示意动画"/>';
       el("guide-title").textContent = "请佩戴 VR 设备";
       el("guide-english").textContent =
         "Put on your VR headset. Settle in comfortably.";
-      el("wear-confirm").textContent = "已佩戴，开始感应 / BEGIN SIMULATION";
+      el("wear-confirm").textContent = homeVR?.active
+        ? "已佩戴，开始感应 / BEGIN SIMULATION"
+        : "进入虚拟现实 / ENTER VR";
+      return;
+    }
+    if (guideStage === 2 && virtualMode && !homeVR?.active) {
+      el("vr-entry").click();
       return;
     }
     show("sense");
@@ -292,7 +301,7 @@ duration = 10s;</pre><p class="data-note">未连接传感器<br>心情与曲线�
       pause: stop,
     },
   });
-  el("home-vr-trigger").onclick = () => el("vr-entry").click();
+  el("home-vr-trigger").onclick = () => startGuide(true);
   window.addEventListener("pageshow", (event) => {
     if (event.persisted && el("sense-view") && !el("sense-view").hidden) {
       reset();
