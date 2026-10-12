@@ -26,9 +26,9 @@ test("VR sensing follows shared stages and preserves the selected result", () =>
   const welcome = homeXRPage({ view: "home" });
   assert.deepEqual(
     welcome.choices.map((c) => c.action),
-    ["free", "sense"],
+    ["sense", "free"],
   );
-  assert.match(welcome.choices[1].label, /模拟体验/);
+  assert.match(welcome.choices[0].label, /模拟体验/);
   const arrival = homeXRPage({ view: "wear", guideStage: 0 });
   const wear = homeXRPage({ view: "wear", guideStage: 1 });
   assert.match(arrival.title, /请走近/);
