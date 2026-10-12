@@ -1,3 +1,4 @@
+import { createAnimationAtlases } from "./gif-atlas.js";
 import { drawReferencePoster } from "./poster-art.js";
 import { loadBrandImages, brandWordmark, posterText, brand } from "./brand.js";
 import * as THREE from "three";
@@ -44,7 +45,22 @@ export function mountHomeVR({ read, actions }) {
     resources.push(geo, mat);
     return new THREE.Mesh(geo, mat);
   }
-  root.add(card(4.4, 2.8, 0x151923, 0.94));
+  const backdrop = card(4.4, 2.8, 0x151923, 0.86);
+  root.add(backdrop);
+  const fill = new THREE.HemisphereLight(0xe0ecff, 0x18202a, 2.3);
+  const keyLight = new THREE.DirectionalLight(0xc4eee6, 3.2);
+  keyLight.position.set(-2,3,4);
+  root.add(fill, keyLight);
+  const guidePlate = card(3.3,2.65,0x28313e,0.20);
+  guidePlate.position.set(0,-0.01,-0.20);
+  guidePlate.visible = false;
+  root.add(guidePlate);
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(0.47,0.003,8,96),new THREE.MeshBasicMaterial({color:0x87bfb8,transparent:true,opacity:0.45}));
+  halo.position.set(0,0.49,-0.02);
+  root.add(halo); resources.push(halo.geometry,halo.material);
+  const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.58,0.025,64),new THREE.MeshStandardMaterial({color:0x263b43,metalness:0.55,roughness:0.35}));
+  pedestal.position.set(0,-0.07,0.13);
+  root.add(pedestal); resources.push(pedestal.geometry,pedestal.material);
   const rim = card(4.44, 2.84, 0xaca7c3, 0.18);
   rim.position.z = -0.055;
   root.add(rim);
@@ -106,25 +122,34 @@ export function mountHomeVR({ read, actions }) {
     map: mediaTexture,
     toneMapped: false,
     transparent: true,
+    depthWrite: false,
   });
   const mediaGeometry = new THREE.PlaneGeometry(1.8, 0.9);
   const media = new THREE.Mesh(mediaGeometry, mediaMaterial);
-  media.position.set(0, 0.23, 0.12);
+  media.position.set(0, 0.49, 0.40);
+  const animations = createAnimationAtlases();
+  ["person-enter-v2", "sensor-wear", "vr-put-on-white-transparent", "hands-breathing"].forEach(name => animations.preload(`./images/${name}.gif`));
   resources.push(mediaTexture, mediaMaterial, mediaGeometry);
   root.add(media);
   const buttons = [];
   function button(w, h, label, action) {
     const group = new THREE.Group();
-    const body = card(w, h, 0x355963, 0.78);
+    const body = card(w, h, 0x273b43, 0.86);
+    const buttonMaterial = new THREE.MeshPhysicalMaterial({color:0x31464f,metalness:0.28,roughness:0.3,clearcoat:1,clearcoatRoughness:0.3,transparent:true,opacity:0.86});
+    body.material = buttonMaterial; resources.push(buttonMaterial);
+    body.scale.z = 2.2;
+    const edge = card(w+0.018,h+0.018,0x95bdb7,0.36);
+    edge.position.z = -0.08;
+    group.add(edge);
     const face = text(w - 0.04, h - 0.02, 72, true);
-    face.position.z = 0.05;
+    face.position.z = 0.095;
     face.userData.draw(label);
     group.add(body, face);
     root.add(group);
-    const entry = { name: label, action, object: group };
+    const entry = { name: label, action: () => { group.userData.pressedUntil = performance.now() + 180; return action(); }, object: group };
     group.userData.interaction = entry;
     registry.push(entry);
-    const result = { group, face, entry };
+    const result = { group, face, body, edge, entry, restZ: null, pressedUntil: 0 };
     buttons.push(result);
     return result;
   }
@@ -132,9 +157,11 @@ export function mountHomeVR({ read, actions }) {
     page = 0;
     actions.home();
   });
-  back.group.position.set(-1.72, 1.16, 0.09);
+  back.group.position.set(-1.68, 1.15, 0.22);
+  back.group.rotation.y = 0.08; back.restZ = 0.22;
   const exit = button(0.56, 0.17, "退出 VR", () => vr.exit());
-  exit.group.position.set(-1.75, -1.55, 0.09);
+  exit.group.position.set(-1.75, -1.40, -0.10);
+  exit.restZ = -0.10;
   const slots = Array.from({ length: 6 }, () =>
     button(1.24, 0.3, "", () => {}),
   );
@@ -244,18 +271,6 @@ export function mountHomeVR({ read, actions }) {
       dc.fillStyle = "#08090b";
       dc.fillRect(0, 0, 2200, 1400);
       drawReferencePoster(dc, brandImages, 145, 30, 940, 1329);
-      [400, 740].forEach((y, i) => {
-        dc.fillStyle = "#ffffff08";
-        dc.strokeStyle = "#ffffff44";
-        dc.beginPath(); dc.roundRect(1340, y, 720, 285, 8); dc.fill(); dc.stroke();
-        dc.fillStyle = "#f4f4f2";
-        dc.font = '48px "Microsoft YaHei", sans-serif';
-        dc.fillText(i ? "感应选择" : "自由选择", 1390, y + 112);
-        dc.font = '24px "Microsoft YaHei", sans-serif';
-        dc.fillText(i ? "FOLLOW YOUR FEELING" : "FREE EXPLORATION", 1390, y + 195);
-        dc.fillText("↗", 1960, y + 112);
-        if (i) { dc.fillStyle = "#999"; dc.font = '20px "Microsoft YaHei", sans-serif'; dc.fillText("模拟体验", 1910, y + 245); }
-      });
     } else if (d.kind === "free") {
       label("FOLLOW YOUR OWN RHYTHM", 730, 190, 22);
       label("EMOTIONAL FORM / 意境预览", 1500, 470, 22);
@@ -296,6 +311,8 @@ export function mountHomeVR({ read, actions }) {
   let page = 0,
     signature = "",
     mediaTime = 0,
+    animationTime = 0,
+    animationSource = "",
     disposed = false;
   function openRoom(id) {
     if (vr.openScene(id)) {
@@ -325,13 +342,19 @@ export function mountHomeVR({ read, actions }) {
         detail.userData.draw(
           `${selectedScene.name}\n${selectedScene.emotion}\n\n${selectedScene.description.match(/.{1,14}/gu)?.join("\n")}`,
         );
+      const illustrated = Boolean(description.image);
       title.visible = copy.visible = !home;
+      backdrop.visible = rim.visible = home || free;
+      guidePlate.visible = illustrated;
+      halo.visible = pedestal.visible = illustrated;
+      design.visible = home || free;
       title.userData.draw(description.title);
       copy.userData.draw(description.copy);
-      const illustrated = Boolean(description.image);
       media.visible = illustrated;
-      title.position.y = illustrated ? -0.39 : home ? 0.68 : 0.87;
-      copy.position.y = illustrated ? -0.65 : home ? 0.23 : 0.6;
+      title.position.y = illustrated ? -0.32 : home ? 0.68 : 0.87;
+      title.position.z = illustrated ? 0.24 : 0.08;
+      copy.position.y = illustrated ? -0.57 : home ? 0.23 : 0.6;
+      copy.position.z = illustrated ? 0.13 : 0.08;
       back.group.visible = description.kind !== "home";
       previous.group.visible = next.group.visible = description.kind === "free";
       slots.forEach((slot, i) => {
@@ -339,30 +362,32 @@ export function mountHomeVR({ read, actions }) {
         slot.group.visible = Boolean(choice);
         if (!choice) return;
         slot.face.userData.draw(
-          home ? choice.label.split("\n")[0] : choice.label,
+          choice.label,
         );
-        slot.face.visible = !home;
+        slot.face.visible = true;
         slot.group.scale.set(home ? 1.16 : free ? 0.66 : 1, home ? 1.9 : 1, 1);
-        slot.group.children[0].material.opacity = free
+        slot.body.material.opacity = free
           ? choice.scene === selectedScene?.id
             ? 0.23
             : 0.025
           : home
-            ? 0.07
-            : 0.6;
+            ? 0.86
+            : 0.9;
         nodeOrbits[i].visible = free;
         nodeOrbits[i].scale.setScalar(
           choice.scene === selectedScene?.id ? 1.5 : 1,
         );
         slot.entry.name = choice.label;
-        slot.entry.action = () =>
-          choice.scene
+        slot.entry.action = () => {
+          slot.group.userData.pressedUntil = performance.now() + 180;
+          return choice.scene
             ? free
               ? (selectedScene = emotionScenes.find(
                   (s) => s.id === choice.scene,
                 ))
               : openRoom(choice.scene)
             : actions[choice.action]();
+        };
         slot.group.position.set(
           illustrated
             ? 0
@@ -370,39 +395,47 @@ export function mountHomeVR({ read, actions }) {
               ? [-1.48, -0.6, -1.1, -0.1, -1.48, -0.45][i]
               : 1.2,
           illustrated
-            ? -0.91
+            ? -0.99
             : description.kind === "free"
               ? [0.3, 0.45, -0.12, 0, -0.62, -0.55][i]
               : i === 0
                 ? 0.315
                 : -0.365,
-          free ? 0.16 + (i % 3) * 0.035 : 0.12,
+          free ? 0.16 + (i % 3) * 0.035 : illustrated ? 0.42 : 0.20,
         );
+        slot.restZ = slot.group.position.z;
+        slot.group.rotation.y = illustrated ? -0.04 : home ? -0.07 : 0;
+        if (illustrated) slot.group.scale.set(1.4,1.2,1);
       });
     }
     mediaTime += dt;
-    if (description.image && mediaTime > 1 / 15) {
+    const source = description.image && state[description.image];
+    const sourceURL = source?.currentSrc || source?.src || "";
+    if (animationSource !== sourceURL) { animationSource = sourceURL; animationTime = 0; }
+    animationTime += dt * 1000;
+    if (source && mediaTime > 1 / 30) {
       mediaTime = 0;
-      const source = state[description.image];
-      if (
-        source &&
-        (source.tagName === "CANVAS" ||
-          (source.complete && source.naturalWidth))
-      ) {
-        mediaContext.clearRect(0, 0, 1024, 512);
-        const width = source.naturalWidth || source.width,
-          height = source.naturalHeight || source.height;
-        const ratio = Math.min(1024 / width, 512 / height);
-        mediaContext.drawImage(
-          source,
-          (1024 - width * ratio) / 2,
-          (512 - height * ratio) / 2,
-          width * ratio,
-          height * ratio,
-        );
-        mediaTexture.needsUpdate = true;
+      mediaContext.clearRect(0,0,1024,512);
+      if (source.tagName === "CANVAS") {
+        const ratio = Math.min(1024/source.width,512/source.height);
+        mediaContext.drawImage(source,(1024-source.width*ratio)/2,(512-source.height*ratio)/2,source.width*ratio,source.height*ratio);
+      } else {
+        animations.draw(mediaContext,sourceURL,animationTime,1024,512);
       }
+      mediaTexture.needsUpdate = true;
     }
+    const now = performance.now();
+    for (const b of buttons) {
+      const hover = vr.focusedObject === b.group;
+      const pressed = now < (b.group.userData.pressedUntil || 0);
+      const target = (b.restZ ??= b.group.position.z) + (pressed ? -0.035 : hover ? 0.055 : 0);
+      b.group.position.z = THREE.MathUtils.damp(b.group.position.z,target,14,dt);
+      b.body.material.color.lerp(new THREE.Color(hover ? 0x526d76 : 0x31464f),1-Math.exp(-dt*12));
+      b.edge.material.opacity = hover ? 0.75 : 0.30;
+    }
+    halo.rotation.z += dt * 0.08;
+    halo.material.opacity = 0.28 + Math.sin(now/1700)*0.10;
+    media.position.y = 0.49 + Math.sin(now/2300)*0.012;
     media.scale.setScalar(
       description.kind === "sensing"
         ? 1 + Math.sin(performance.now() / 1300) * 0.025
@@ -480,6 +513,7 @@ export function mountHomeVR({ read, actions }) {
       vr.dispose();
       events.abort();
       renderer.setAnimationLoop(null);
+      animations.dispose();
       resources.forEach((resource) => resource.dispose());
       renderer.dispose();
       renderer.domElement.remove();

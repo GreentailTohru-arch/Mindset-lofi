@@ -251,14 +251,17 @@ export function createVR({
   function button(x, y, w, text, action, parent = panel) {
     const group = new THREE.Group();
     group.position.set(x, y, 0.082);
-    const body = box(w, 0.092, 0.026, color.card);
+    const edge = box(w + 0.008, 0.100, 0.036, 0x8aafa9);
+    edge.material.opacity = 0.22;
+    edge.position.z = -0.012;
+    const body = box(w, 0.092, 0.045, color.card);
     const face = label(w - 0.01, 0.076, text, 29, true);
-    face.position.z = 0.015;
-    group.add(body, face);
+    face.position.z = 0.028;
+    group.add(edge, body, face);
     parent.add(group);
     const entry = { name: text, action, object: group };
     group.userData.interaction = entry;
-    const item = { group, body, face, entry, rest: group.position.z };
+    const item = { group, body, edge, face, entry, rest: group.position.z };
     buttons.push(item);
     return item;
   }
@@ -1243,6 +1246,7 @@ export function createVR({
     get active() {
       return active;
     },
+    get focusedObject() { return focus?.entry?.object || null; },
     get diagnostics() {
       return {
         active,
@@ -1323,14 +1327,15 @@ export function createVR({
         const hover = focus?.entry === b.entry;
         b.group.position.z = THREE.MathUtils.damp(
           b.group.position.z,
-          b.rest + (hover ? 0.018 : 0),
+          b.rest + (hover ? 0.035 : 0),
           14,
           dt,
         );
         b.body.material.color.setHex(
           hover ? 0x638f99 : b.selected ? 0x436d7d : color.card,
         );
-        b.body.material.opacity = hover || b.selected ? 0.88 : 0.48;
+        b.body.material.opacity = hover || b.selected ? 0.94 : 0.74;
+        b.edge.material.opacity = hover ? 0.62 : 0.22;
       }
       if (performance.now() > statusUntil)
         status.userData.draw(
