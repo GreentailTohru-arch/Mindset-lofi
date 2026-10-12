@@ -66,7 +66,7 @@ export function homeXRPage(state, page = 0) {
     title: "心境 LOFI",
     copy: "让空间回应心情，让此刻慢下来。",
     choices: [
-      { label: "脑电传感模式 · 模拟体验\nEEG SENSING MODE", action: "sense" },
+      { label: "脑电传感模式\nEEG SENSING MODE", action: "sense" },
       { label: "自由选择模式\nFREE SELECTION MODE", action: "free" },
     ],
   };

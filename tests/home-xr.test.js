@@ -28,7 +28,8 @@ test("VR sensing follows shared stages and preserves the selected result", () =>
     welcome.choices.map((c) => c.action),
     ["sense", "free"],
   );
-  assert.match(welcome.choices[0].label, /模拟体验/);
+  assert.equal(welcome.choices[0].label, "脑电传感模式\nEEG SENSING MODE");
+  assert.equal(welcome.choices[1].label, "自由选择模式\nFREE SELECTION MODE");
   const arrival = homeXRPage({ view: "wear", guideStage: 0 });
   const wear = homeXRPage({ view: "wear", guideStage: 1 });
   assert.match(arrival.title, /请走近/);

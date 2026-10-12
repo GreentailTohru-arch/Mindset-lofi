@@ -356,6 +356,7 @@ export function mountHomeVR({ read, actions }) {
       copy.position.y = illustrated ? -0.57 : home ? 0.23 : 0.6;
       copy.position.z = illustrated ? 0.13 : 0.08;
       back.group.visible = description.kind !== "home";
+      exit.group.position.y = home ? -1.55 : -1.4;
       previous.group.visible = next.group.visible = description.kind === "free";
       slots.forEach((slot, i) => {
         const choice = description.choices[i];
