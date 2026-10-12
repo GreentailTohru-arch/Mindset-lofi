@@ -42,7 +42,7 @@ export function mountHome() {
       <section id="home-intro" class="home-intro reference-home" aria-label="心境 LOFI 首页">
         <div class="reference-art">${posterMarkup()}</div>
         <div class="reference-entry">
-          <button id="sense-mode" class="reference-choice"><span>脑电传感模式</span><small>EEG SENSING MODE</small><b aria-hidden="true">↗</b><em>模拟体验</em></button>
+          <button id="sense-mode" class="reference-choice"><span>脑电传感模式</span><small>EEG SENSING MODE</small><b aria-hidden="true">↗</b></button>
           <button id="home-vr-trigger" class="reference-choice"><span>虚拟现实模式</span><small>VIRTUAL REALITY MODE</small><b aria-hidden="true">↗</b></button>
           <button id="free-mode" class="reference-choice"><span>自由选择模式</span><small>FREE SELECTION MODE</small><b aria-hidden="true">↗</b></button>
         </div>
