@@ -3,7 +3,7 @@ export const brand = {
   wordmark: "./images/brand/mindset-wordmark.png",
   symbol: "./images/brand/mindset-symbol.png",
   slogan: "回归本真",
-  english: "RECONNECT WITH YOUR TRUE SELF",
+  english: "Reconnect Your True Self",
   subtitle: "沉浸式专注空间疗愈体验",
 };
 
@@ -17,6 +17,14 @@ export function loadBrandImages(redraw) {
       redraw();
     };
     image.src = brand[key];
+  }
+  if (typeof document !== "undefined" && document.fonts?.load) {
+    Promise.all([
+      document.fonts.load('16px "Mindset Times"'),
+      document.fonts.load('16px "Mindset Song"'),
+      document.fonts.load('16px "Mindset Qingke"'),
+      document.fonts.load('16px "Mindset Samsung"'),
+    ]).then(redraw).catch(() => {});
   }
   return images;
 }
@@ -44,7 +52,12 @@ export function posterText(
   serif = false,
 ) {
   ctx.fillStyle = color;
-  ctx.font = `400 ${size}px ${serif ? 'Georgia, "Songti SC", SimSun, serif' : '"Microsoft YaHei", sans-serif'}`;
+  const family = text === brand.subtitle ? '"Mindset Qingke", SimSun, serif'
+    : text === brand.slogan ? '"Mindset Song", SimSun, "Songti SC", serif'
+    : /Powered by|Tomatotodo/i.test(text) ? '"Mindset Samsung", sans-serif'
+    : /[A-Za-z]/.test(text) ? '"Mindset Times", "Times New Roman", serif'
+    : serif ? 'SimSun, serif' : '"Microsoft YaHei", sans-serif';
+  ctx.font = `400 ${size}px ${family}`;
   ctx.textAlign = "left";
   ctx.textBaseline = "alphabetic";
   ctx.fillText(text, x, y);
@@ -105,8 +118,8 @@ export function paintRoomIdentity(ctx, images, kind, name, intro) {
   ctx.lineTo(1135, 755);
   ctx.stroke();
   posterText(ctx, brand.slogan, 65, 835, 54, "#183b37", true);
-  posterText(ctx, "RECONNECT WITH", 430, 815, 26, "#183b37", true);
-  posterText(ctx, "YOUR TRUE SELF", 430, 851, 26, "#183b37", true);
+  posterText(ctx, "Reconnect", 430, 815, 26, "#183b37", true);
+  posterText(ctx, "Your True Self", 430, 851, 26, "#183b37", true);
   if (images.symbol) ctx.drawImage(images.symbol, 930, 775, 200, 94);
   ctx.restore();
 }

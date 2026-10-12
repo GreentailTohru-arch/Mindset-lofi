@@ -1,3 +1,4 @@
+import "./ui/fonts.css";
 const params = new URLSearchParams(location.search);
 if (params.has("scene") || params.has("clean")) {
   await import("./main.js");

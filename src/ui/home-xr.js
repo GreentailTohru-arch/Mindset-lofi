@@ -259,8 +259,8 @@ export function mountHomeVR({ read, actions }) {
       homeText(dc, "THE MINDSET", 440, 670, 83, "#f4f4f2", true);
       homeText(dc, "OF LOW FIDELITY", 440, 748, 57, "#f4f4f2", true);
       homeText(dc, brand.slogan, 140, 968, 83, "#f4f4f2", true);
-      homeText(dc, "RECONNECT WITH", 590, 930, 32, "#f4f4f2", true);
-      homeText(dc, "YOUR TRUE SELF", 590, 980, 32, "#f4f4f2", true);
+      homeText(dc, "Reconnect", 590, 930, 32, "#f4f4f2", true);
+      homeText(dc, "Your True Self", 590, 980, 32, "#f4f4f2", true);
       dc.beginPath();
       dc.moveTo(1230, 240);
       dc.lineTo(1230, 1050);
@@ -314,14 +314,15 @@ export function mountHomeVR({ read, actions }) {
       homeText(dc, brand.subtitle, 140, 1195, 47, "#f4f4f2", true);
       homeText(
         dc,
-        "IMMERSIVE MINDFUL FOCUS & HEALING EXPERIENCE",
+        "Immersive Mindful Focus and Healing Experience",
         140,
         1250,
         25,
         "#f4f4f2",
         true,
       );
-      homeText(dc, "24 SPACES / ONE INNER WORLD", 1480, 1240, 24);
+      homeText(dc, "Powered by EGG × VR", 1480, 1195, 28);
+      homeText(dc, "mindset of lo-fi & Tomatotodo", 1480, 1240, 24);
     } else if (d.kind === "free") {
       label("FOLLOW YOUR OWN RHYTHM", 730, 190, 22);
       label("EMOTIONAL FORM / 意境预览", 1500, 470, 22);

@@ -1,0 +1,8 @@
+@font-face { font-family: "Mindset Song"; src: url("../../public/fonts/simsun-slogan.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Mindset Times"; src: url("../../public/fonts/times-new-roman.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Mindset Samsung"; src: url("../../public/fonts/samsung-sharp-sans.otf") format("opentype"); font-display: swap; }
+@font-face { font-family: "Mindset Qingke"; src: url("../../public/fonts/fz-qingke-yuesong.ttf") format("truetype"); font-display: swap; }
+.poster-lockup p, .poster-slogan p, .poster-footer > div > span, .identity-lockup > span, .home-note { font-family: "Mindset Times", "Times New Roman", serif !important; }
+.poster-slogan > span { font-family: "Mindset Song", SimSun, "Songti SC", serif !important; }
+.poster-footer > div > p { font-family: "Mindset Qingke", SimSun, serif !important; }
+.poster-footer .brand-credits { font-family: "Mindset Samsung", sans-serif; font-size: clamp(10px, 1vw, 14px); line-height: 1.8; letter-spacing: .02em; white-space: normal; }

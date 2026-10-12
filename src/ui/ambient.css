@@ -988,3 +988,6 @@ html[data-scene] #experience.themed-experience {
     display: none;
   }
 }
+
+/* Minimal scene signature, floating directly over the model. */
+#ui-layer .scene-identity { width: auto; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; }

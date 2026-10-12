@@ -1,5 +1,5 @@
 import { brand } from "./brand.js";
-import { greetingForHour, sceneStories } from "./scene-stories.js";
+import { sceneStories } from "./scene-stories.js";
 import { createAmbientAudio } from "./audio.js";
 import { moodOrder } from "./mood-config.js";
 import { mountMoodDrawer } from "./mood-drawer.js";
@@ -41,9 +41,6 @@ export function mountAmbientUI({ notify, store }) {
     `
     <header class="greeting scene-identity">
       <a class="identity-lockup" href="./" aria-label="返回心境LOFI首页"><img src="${brand.wordmark}" alt="心境"/><span>THE MINDSET<br><em>OF LOW FIDELITY</em></span></a>
-      <div class="identity-rule"></div><p class="identity-subtitle">${brand.subtitle}</p>
-      <div class="identity-slogan"><strong>${brand.slogan}</strong><span>RECONNECT WITH<br>YOUR TRUE SELF</span></div>
-      <p id="dynamic-greeting"></p><span id="identity-room" class="identity-room"></span>
     </header>
     <nav class="scene-navigation" aria-label="场景导览">
       <a id="previous-scene" class="scene-arrow scene-arrow-left" aria-label="上一个场景">${chevron(-1)}<span class="nav-caption">上一处</span></a>
@@ -62,11 +59,6 @@ export function mountAmbientUI({ notify, store }) {
     </nav>`,
   );
 
-  const greeting = () => {
-    el("dynamic-greeting").textContent = greetingForHour(new Date().getHours());
-  };
-  greeting();
-  window.setInterval(greeting, 1000);
   const settings = el("open-panel");
   settings.className = "glass control-button";
   settings.title = "设置";
@@ -381,8 +373,6 @@ export function mountAmbientUI({ notify, store }) {
       const ids = moodOrder;
       const index = ids.indexOf(active);
       el("scene-title").textContent = presets[active].label;
-      el("identity-room").textContent =
-        `${String(index + 1).padStart(2, "0")} / ${presets[active].label} · LOFI SPACE`;
       el("scene-position").textContent =
         `MINDSET / ${String(index + 1).padStart(2, "0")} — ${String(ids.length).padStart(2, "0")}`;
       const [story, design] = sceneStories[active];
