@@ -9,6 +9,7 @@ export const panoramaIds = new Set([
 // Backgrounds fill the sky and both open sides without adding collision walls.
 // Retain only the current texture on the GPU, and discard late async results.
 export function createVRPanorama({ loader = new THREE.TextureLoader(), onError = () => {} } = {}) {
+  let enabled = false;
   let generation = 0, target = null, texture = null, previous = null, currentId = null;
   function clear() {
     generation++;
@@ -25,6 +26,10 @@ export function createVRPanorama({ loader = new THREE.TextureLoader(), onError =
     if (!panoramaIds.has(id)) return;
     target = scene; currentId = id;
     previous = { background: scene.background, intensity: scene.backgroundIntensity, blur: scene.backgroundBlurriness };
+    if (enabled) load();
+  }
+  function load() {
+    const scene = target, id = currentId;
     const request = generation;
     loader.load(`./images/panoramas/${id}.webp`, image => {
       if (request !== generation) { image.dispose(); return; }
@@ -34,14 +39,21 @@ export function createVRPanorama({ loader = new THREE.TextureLoader(), onError =
       scene.background = image;
       scene.backgroundBlurriness = 0;
     }, undefined, () => {
-      if (request === generation) onError('全景背景暂未加载，请检查网络后重新进入场景');
+      if (request === generation) onError('全景背景暂未加载，请检查网络后关闭全景后重试');
     });
   }
-  return { bind, clear, dispose: clear,
+  function setEnabled(value) {
+    if (enabled === Boolean(value)) return;
+    enabled = Boolean(value);
+    const scene = target, id = currentId;
+    if (scene) bind(scene, id);
+  }
+  return { bind, clear, setEnabled, dispose: clear,
+    get enabled() { return enabled; },
     get currentId() { return currentId; },
     get ready() { return Boolean(texture); },
     update(dt, state) {
-      if (!target) return;
+      if (!target || !texture) return;
       const weather = state.weather === 'rain' ? .72 : state.weather === 'snow' ? .88 : 1;
       const intensity = (state.day ? .85 : .24) * weather;
       target.backgroundIntensity = THREE.MathUtils.damp(target.backgroundIntensity, intensity, 2.5, dt);

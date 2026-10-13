@@ -332,7 +332,7 @@ export function createVR({
     group.rotation.y = yaw;
     group.scale.setScalar(2.1);
     wallUI.add(group);
-    const backing = box(1.3, 1.57, 0.07, 0x172b2d);
+    const backing = box(1.3, kind === "environment" ? 1.87 : 1.57, 0.07, 0x172b2d);
     backing.material.opacity = 0.93;
     group.add(backing);
     const canvas = document.createElement("canvas");
@@ -453,8 +453,14 @@ export function createVR({
     );
     wallFields.push({ b, name });
   });
+  const panoramaName = () => panorama.enabled ? "全景背景 · 开（点击关闭）" : "全景背景 · 关（点击开启）";
+  const panoramaButton = button(0, -0.77, 1.12, panoramaName(), () => {
+    panorama.setEnabled(!panorama.enabled);
+    refresh();
+  }, environmentWall);
+  wallFields.push({ b: panoramaButton, name: panoramaName });
   const walkHint = label(1.15, 0.07, "", 24);
-  walkHint.position.set(0, -0.72, 0.065);
+  walkHint.position.set(0, -0.88, 0.065);
   environmentWall.add(walkHint);
   function cycleWeather() {
     store.set(
@@ -1005,6 +1011,7 @@ export function createVR({
   }
   function begin(isPreview = false) {
     if (active) return;
+    panorama.setEnabled(false);
     preview = isPreview;
     active = true;
     home?.onActive?.(true);
@@ -1056,6 +1063,7 @@ export function createVR({
     boundary.visible = false;
     keys.clear();
     restoreWorld();
+    panorama.setEnabled(false);
     refresh();
     space.visible = false;
     gazeDot.visible = false;
@@ -1266,6 +1274,7 @@ export function createVR({
         wallPanels: wallUI.visible,
         panorama: panorama.currentId,
         panoramaReady: panorama.ready,
+        panoramaEnabled: panorama.enabled,
         weather: store.state.weather,
         view: viewNames[mode],
         menu: panel.visible,
