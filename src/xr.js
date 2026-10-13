@@ -1,3 +1,4 @@
+import { createVRPanorama } from "./xr-panorama.js";
 import { loadBrandImages, paintRoomIdentity } from "./ui/brand.js";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
@@ -22,6 +23,7 @@ export function createVR({
   home = null,
 }) {
   const events = new AbortController();
+  const panorama = createVRPanorama({ onError: text => message(text) });
   let modelRoots = [...scene.children];
   const originalRoots = modelRoots,
     originalStore = store;
@@ -665,6 +667,7 @@ export function createVR({
   unsubscribe = store.subscribe(refresh);
   refresh();
   function restoreWorld() {
+    panorama.clear();
     if (!world) return;
     scene.add(rig, boundary, wallUI, teleportVisual, weather.root);
     world.dispose();
@@ -700,6 +703,7 @@ export function createVR({
         next.scene.add(rig, boundary, wallUI, teleportVisual, weather.root);
       }
       currentId = id;
+      panorama.bind(world?.scene || scene, currentId);
       panel.visible = !(home && id === sceneId);
       weather.bind(modelRoots);
       page = 0;
@@ -1029,6 +1033,7 @@ export function createVR({
     camera.fov = 65;
     camera.updateProjectionMatrix();
     scene.background = new THREE.Color(0x101522);
+    panorama.bind(scene, currentId);
     space.visible = true;
     panel.visible = true;
     needsPlacement = !preview;
@@ -1237,6 +1242,7 @@ export function createVR({
       wallUI.removeFromParent();
       teleportVisual.removeFromParent();
       weather.root.removeFromParent();
+      panorama.dispose();
       resources.forEach((resource) => resource.dispose());
       back.material.dispose();
     },
@@ -1258,6 +1264,8 @@ export function createVR({
         locomotion,
         teleportValid: teleportResult?.valid || false,
         wallPanels: wallUI.visible,
+        panorama: panorama.currentId,
+        panoramaReady: panorama.ready,
         weather: store.state.weather,
         view: viewNames[mode],
         menu: panel.visible,
@@ -1267,6 +1275,7 @@ export function createVR({
     update(dt) {
       if (!active) return;
       world?.update(dt);
+      panorama.update(dt, store.state);
       weather.update(dt, store.state, active);
       if (!preview) {
         // WebXR updates poses before this callback; update matrices before rays.

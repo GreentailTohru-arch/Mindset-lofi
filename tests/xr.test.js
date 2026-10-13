@@ -107,6 +107,7 @@ test("VR session restores desktop camera and routes controller actions to room s
   const controlsElement = new Element();
   globalThis.document = {
     createElement: () => new Element(),
+    createElementNS: () => new Element(),
     documentElement: { dataset: {} },
     body: new Element(),
     querySelector: () => controlsElement,

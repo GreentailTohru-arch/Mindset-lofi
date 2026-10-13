@@ -1,0 +1,146 @@
+[
+  {
+    "id": "uyghur",
+    "name": "维吾尔",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Kashgar oasis garden with carved wood, grape pergolas, sand plaster and sunset mountains. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "tibetan",
+    "name": "藏式",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Tibetan plateau residential courtyard, dark timber beams and muted red ochre earth plaster houses, distant snowy Himalayan peaks, prayer-flag-like plain unlettered colored cloth, junipers, cool violet evening sky and warm amber windows, secular village. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "brutalist",
+    "name": "粗野主义",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: monumental raw concrete courtyard, sculptural concrete terraces, board-formed walls, reflecting basin, distant pine hills, soft overcast silver sky. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "memphis",
+    "name": "孟菲斯风格",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: playful Memphis design sculpture garden, pastel coral and cobalt geometric pavilions, terrazzo paths, striped columns and colorful abstract shapes, bright soft sky, refined orderly architecture. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "tropical",
+    "name": "东南亚风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Southeast Asian tropical villa garden, teak verandas, palm grove, broad tropical leaves, serene stone water garden, distant limestone hills, golden humid dusk. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "studio",
+    "name": "电竞影音",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: quiet futuristic contemporary city rooftop courtyard, distant restrained cyan and purple illuminated skyscrapers, dark metal terraces, blue twilight sky, no signage. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "classic",
+    "name": "温馨卧室",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: cozy quiet residential garden viewed from a balcony-level open terrace, warm brick and timber homes, leafy trees, distant town hills, soft blue evening sky, amber windows. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "ruya",
+    "name": "儒风雅韵",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: traditional Chinese scholarly garden, bamboo, white plaster garden walls, gray tile roofs, distant misty mountains, pond and graceful winding veranda, gentle morning light. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "renaissance",
+    "name": "美式田园",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: American countryside farmhouse garden, timber barns and white clapboard porch in the distance, rolling meadow and oak trees, orchard, warm late afternoon clouds. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "athens",
+    "name": "雅典神话",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Aegean coastal villa courtyard, pale limestone Ionic colonnades in distance, olive trees and cypress, blue sea and distant islands, luminous peach dusk sky. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "palace",
+    "name": "金碧辉煌",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: traditional Chinese imperial garden, red timber pavilion and jade green glazed roof tiles in distance, ornamental pond, pine and flowering plum, golden evening light, serene not crowded. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "bauhaus",
+    "name": "包豪斯",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Bauhaus modernist garden courtyard, white cubic architecture, large steel windows, restrained red blue yellow sculptural accents, geometric lawns, clear soft daylight. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "baroque",
+    "name": "巴洛克",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: European baroque palace terrace garden, distant cream stone facade with balanced ornate details, fountains and formal hedges, warm twilight, atmospheric blue sky. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "wabisabi",
+    "name": "侘寂风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: quiet wabi sabi garden, earthen plaster pavilions, weathered wood, mossy stones and dry grass, subdued gray hills, hazy soft morning sky, imperfect natural materials. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "machiya",
+    "name": "日式町屋",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Kyoto machiya residential garden courtyard, distant dark timber lattice houses with tiled roofs, maple trees, stone lanterns and narrow stream, delicate blue dusk and warm lamps. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "nordic",
+    "name": "北欧风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Scandinavian lakeside landscape, pale timber cabins in the distance, birch and pine trees, calm lake and low mountains, soft cool daylight and luminous clouds. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "dongfang",
+    "name": "东方美学",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: contemporary Chinese courtyard garden, light stone walls and fine dark timber screens, bamboo, calm reflecting pool, misty mountain silhouettes, elegant restrained afternoon light. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "mediterranean",
+    "name": "地中海风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: Mediterranean seaside courtyard, whitewashed stucco arches and blue shutters, bougainvillea, terracotta paving, blue sea and sunlit distant hills, soft warm daylight. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "italian",
+    "name": "意式轻奢",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: elegant Italian lakeside villa garden, travertine terraces and dark wood pergolas, cypress and olive trees, distant lake and mountains, refined golden dusk. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "bohemian",
+    "name": "波西米亚",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: relaxed bohemian Mediterranean rooftop garden, warm ochre plaster residences, subtle woven shade canopies and terracotta pots, distant old town and hills, dusty rose sunset. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "midcentury",
+    "name": "中古风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: midcentury modern California courtyard, low walnut and stone houses with glass walls in distance, desert palms and sculptural planting, distant hills, amber sunset. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "french",
+    "name": "法式复古",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: quiet French courtyard terrace, cream Haussmann facades and wrought iron balconies in distance, roses and plane trees, pale stone paths, gentle lavender evening sky. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "industrial",
+    "name": "工业风",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: restored industrial loft courtyard, distant weathered red brick warehouses and black steel windows, clean stone pavement, sparse mature trees, far city skyline, moody blue dusk. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  },
+  {
+    "id": "artdeco",
+    "name": "装饰艺术",
+    "prompt": "Use case: stylized-concept. ONE production VR environment texture. Full 360 x 180 degree equirectangular spherical panorama, exact 2:1 aspect, horizon at vertical center, seamless wrap at left/right edges, correct polar projection for zenith sky and nadir ground. Human eye level in spacious empty outdoor courtyard, buildings at least 12m away. Environment: art deco hotel garden terrace, symmetrical cream stone facades with stepped black and brass geometric accents, palms, polished stone paths, distant city, glamorous amber dusk. Premium stylized realistic 3D game art matching a detailed lofi room. Continuous coherent landscape around all directions, plenty of open sky above. Existing furnished room will be composited in front: no central room, no foreground furniture, no close walls, no people, no writing, no signs, no logos, no watermarks, no borders, no collage. Ground lower hemisphere, sky upper hemisphere. This is a texture, not a mockup.",
+    "generator": "built-in imagegen"
+  }
+]
