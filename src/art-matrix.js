@@ -47,7 +47,7 @@ function start(renderer) {
     particles.setAttribute('position',new THREE.BufferAttribute(new Float32Array(count*3),3).setUsage(THREE.DynamicDrawUsage));
     const points = new THREE.Points(particles,new THREE.PointsMaterial({color:emotionParticleColors[mode],map,size:4,sizeAttenuation:false,transparent:true,opacity:.88,blending:THREE.AdditiveBlending,depthWrite:false}));
     points.frustumCulled=false;group.add(points);
-    return {scene,group,geometry,particles,points,view,rect:null};
+    return {scene,group,geometry,particles,points,wire,view,rect:null};
   });
   let width=0,height=0,paused=false,time=0,last=performance.now(),frame=0;
   function resize(){
@@ -77,6 +77,15 @@ function start(renderer) {
     if(!paused)time+=Math.max(0,Math.min((now-last)/1000,.1));last=now;
     renderer.setScissorTest(false);renderer.setViewport(0,0,width,height);renderer.clear();renderer.setScissorTest(true);
     artworks.forEach((a,i)=>{
+      // Row-major entrance: first row left to right, then the next row.
+      const progress=Math.max(0,Math.min(1,(time-.5-i*.32)/.85));
+      const reveal=progress*progress*(3-2*progress);
+      a.wire.material.opacity=.22*reveal;
+      a.points.material.opacity=.88*reveal;
+      a.group.scale.setScalar(.88+.12*reveal);
+      a.group.position.y=-.10*(1-reveal);
+      a.view.parentElement.style.opacity=String(reveal);
+      if(!progress)return;
       update(a,i,time);
       const r=a.rect, aspect=r.width/r.height;
       camera.left=-1.22*Math.max(1,aspect);camera.right=-camera.left;
@@ -87,14 +96,10 @@ function start(renderer) {
     });
     frame=requestAnimationFrame(draw);
   }
-  const play=document.querySelector('#play');
-  function togglePlay(){paused=!paused;play.textContent=paused?'继续播放':'暂停';}
-  function restart(){time=0;last=performance.now();}
+  function togglePlay(){paused=!paused;}
+  function restart(){time=0;paused=false;last=performance.now();}
   function clean(){document.body.classList.toggle('clean');}
-  async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{document.querySelector('#fullscreen').textContent='请按 F11 全屏';}}
-  play.onclick=togglePlay;document.querySelector('#restart').onclick=restart;
-  document.querySelector('#clean').onclick=clean;document.querySelector('#fullscreen').onclick=fullscreen;
-  document.querySelector('#labels').onclick=e=>{const hidden=document.body.classList.toggle('no-labels');e.currentTarget.textContent=hidden?'文字：关':'文字：开';e.currentTarget.setAttribute('aria-pressed',String(!hidden));};
+  async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{ /* Browser F11 remains available. */ }}
   document.addEventListener('keydown',e=>{
     if(e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
     if(e.code==='Space' && e.target.tagName!=='BUTTON'){e.preventDefault();togglePlay();}
